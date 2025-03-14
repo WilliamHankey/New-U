@@ -48,6 +48,7 @@ const TestimonialCard = ({ testimonial, isActive }: { testimonial: Testimonial, 
 
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { currentSection } = useSection();
   
   const wellnessTestimonials: Testimonial[] = [
     {
@@ -104,7 +105,6 @@ const Testimonials = () => {
     return () => clearInterval(interval);
   }, [activeIndex, currentSection, wellnessTestimonials, inchTestimonials, autoRotate]);
 
-  const { currentSection } = useSection();
   const testimonials = currentSection === 'wellness' ? wellnessTestimonials : inchTestimonials;
 
   const nextTestimonial = () => {
