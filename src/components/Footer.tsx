@@ -85,11 +85,11 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-start">
                 <MapPin className="h-5 w-5 text-newu-green mr-2 mt-0.5" />
-                <span className="text-gray-400">123 Wellness Street, Beauty City, BC 12345</span>
+                <span className="text-gray-400">87 Matthews Street, Klein Nederbury, Paarl 7646</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-5 w-5 text-newu-green mr-2" />
-                <span className="text-gray-400">(555) 123-4567</span>
+                <span className="text-gray-400">(27) 71-952-9055</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-5 w-5 text-newu-green mr-2" />

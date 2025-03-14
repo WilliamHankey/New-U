@@ -59,7 +59,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg mb-1">Phone</h4>
-                  <p className="text-gray-600">(555) 123-4567</p>
+                  <p className="text-gray-600">(27) 71-952-9055</p>
                 </div>
               </div>
               
@@ -79,7 +79,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg mb-1">Location</h4>
-                  <p className="text-gray-600">123 Wellness Way, Serenity City, SC 12345</p>
+                  <p className="text-gray-600">87 Matthews Street, Klein Nederbury, Paarl 7646</p>
                 </div>
               </div>
               
@@ -89,7 +89,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg mb-1">Business Hours</h4>
-                  <p className="text-gray-600">Monday - Friday: 9am - 7pm</p>
+                  <p className="text-gray-600">Monday - Friday: 9am - 5pm</p>
                   <p className="text-gray-600">Saturday: 10am - 5pm</p>
                   <p className="text-gray-600">Sunday: Closed</p>
                 </div>
