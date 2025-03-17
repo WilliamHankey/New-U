@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { SectionProvider } from '../context/SectionContext';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import AboutUs from '../components/AboutUs';
@@ -12,20 +11,18 @@ import Footer from '../components/Footer';
 
 const Index = () => {
   return (
-    <SectionProvider>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <Hero />
-          <AboutUs />
-          <ServicesSection />
-          <Gallery />
-          <Testimonials />
-          <ContactSection />
-        </main>
-        <Footer />
-      </div>
-    </SectionProvider>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow">
+        <Hero />
+        <AboutUs />
+        <ServicesSection />
+        <Gallery />
+        <Testimonials />
+        <ContactSection />
+      </main>
+      <Footer />
+    </div>
   );
 };
 

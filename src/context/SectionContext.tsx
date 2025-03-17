@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 type SectionType = 'wellness' | 'inch';
 
@@ -11,7 +11,16 @@ interface SectionContextType {
 const SectionContext = createContext<SectionContextType | undefined>(undefined);
 
 export const SectionProvider = ({ children }: { children: ReactNode }) => {
-  const [currentSection, setCurrentSection] = useState<SectionType>('wellness');
+  // Initialize state from localStorage or default to 'wellness'
+  const [currentSection, setCurrentSection] = useState<SectionType>(() => {
+    const savedSection = localStorage.getItem('currentSection');
+    return (savedSection as SectionType) || 'wellness';
+  });
+
+  // Save to localStorage whenever section changes
+  useEffect(() => {
+    localStorage.setItem('currentSection', currentSection);
+  }, [currentSection]);
 
   const switchSection = (section: SectionType) => {
     setCurrentSection(section);
