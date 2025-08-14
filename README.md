@@ -1,69 +1,97 @@
-# Welcome to your Lovable project
+# New-U Wellness & Beauty
 
-## Project info
+A modern, responsive website for New-U Wellness & Beauty, a comprehensive wellness and beauty business located in Paarl, South Africa.
 
-**URL**: https://lovable.dev/projects/08cfcaef-6b05-428c-9459-7ec28a5d4a3e
+## About New-U Wellness & Beauty
 
-## How can I edit this code?
+New-U offers two main service categories:
 
-There are several ways of editing your application.
+- **Wellness & Beauty Services**: Therapeutic massages, facial treatments, waxing services, and beauty packages
+- **Inch by Inch Services**: Specialized isometric bed exercises for body transformation and targeted toning
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/08cfcaef-6b05-428c-9459-7ec28a5d4a3e) and start prompting.
+- Modern, responsive design with smooth animations
+- Dual-service approach with section transitions
+- Interactive booking system
+- Gallery showcase
+- Testimonials section
+- Contact information and location details
 
-Changes made via Lovable will be committed automatically to this repo.
+## Technologies Used
 
-**Use your preferred IDE**
+- **Frontend**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **Animations**: Framer Motion
+- **Routing**: React Router DOM
+- **Build Tool**: Vite
+- **State Management**: React Query for data fetching
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerequisites
 
-Follow these steps:
+- Node.js (version 18 or higher)
+- npm or yarn
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Clone the repository:
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+git clone <your-repo-url>
+cd New-U
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build for development
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn/ui components
+│   ├── Hero.tsx        # Hero section
+│   ├── AboutUs.tsx     # About section
+│   ├── ServicesSection.tsx # Services showcase
+│   ├── Gallery.tsx     # Image gallery
+│   ├── Testimonials.tsx # Customer testimonials
+│   ├── ContactSection.tsx # Contact form
+│   ├── Navbar.tsx      # Navigation
+│   └── Footer.tsx      # Footer
+├── pages/              # Page components
+├── context/            # React context providers
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions
+└── main.tsx           # Application entry point
+```
 
-This project is built with .
+## Contact Information
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Address**: 87 Matthews Street, Klein Nederbury, Paarl 7646
+- **Phone**: (27) 71-952-9055
+- **Email**: info@new-u.com
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/08cfcaef-6b05-428c-9459-7ec28a5d4a3e) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is private and proprietary to New-U Wellness & Beauty.

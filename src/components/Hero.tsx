@@ -30,7 +30,7 @@ const Hero = () => {
       title: "Revitalize Your Beauty & Wellness Journey",
       subtitle: "Expert treatments tailored to enhance your natural radiance",
       description: "Experience transformative beauty services and therapeutic wellness treatments designed to rejuvenate both body and mind.",
-      backgroundClass: "bg-[url('/lovable-uploads/d14e2816-c199-410b-95da-99d7bc524636.png')] bg-cover bg-center",
+      backgroundClass: "bg-[url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070')] bg-cover bg-center",
       buttonText: "Explore Our Treatments"
     },
     inch: {
