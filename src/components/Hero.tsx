@@ -38,7 +38,7 @@ const Hero = () => {
       subtitle: "Specialized isometric bed exercises for targeted results",
       description: "Our revolutionary approach helps you reshape your body with precision through effective, low-impact isometric exercises.",
       backgroundClass: "bg-[url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070')] bg-cover bg-center",
-      buttonText: "Discover Our Method"
+      buttonText: "Find Out More"
     }
   };
 
