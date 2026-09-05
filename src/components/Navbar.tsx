@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSection } from '../context/SectionContext';
+import { useSanity } from '../context/SanityContext';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -9,6 +10,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { currentSection, switchSection } = useSection();
+  const { settings } = useSanity();
   const location = useLocation();
 
   // Navigation links
@@ -54,7 +56,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center h-10">
               <span className="text-newu-gray font-heading text-2xl font-bold">
-                <span className="text-newu-green">New-U</span>
+                <span className="text-newu-green">{settings?.title || 'New-U'}</span>
               </span>
             </div>
           </Link>

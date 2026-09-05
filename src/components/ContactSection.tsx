@@ -1,12 +1,25 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { useSanity } from '../context/SanityContext';
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const { settings, services } = useSanity();
   
+  const businessHours = settings?.businessHours && settings.businessHours.length > 0
+    ? settings.businessHours
+    : [
+        "Monday - Friday: 9am - 5pm",
+        "Saturday: 10am - 5pm",
+        "Sunday: Closed",
+      ];
+
+  const serviceOptions = services
+    .filter((s) => s.title)
+    .map((s) => ({ value: s.title!.toLowerCase().replace(/\s+/g, '-'), label: s.title! }));
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     toast({
@@ -27,10 +40,10 @@ const ContactSection = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <span className="text-sm font-semibold text-newu-green uppercase tracking-wider">Get In Touch</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">Contact Us</h2>
+          <span className="text-sm font-semibold text-newu-green uppercase tracking-wider">{settings?.contactEyebrow || 'Get In Touch'}</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">{settings?.contactTitle || 'Contact Us'}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Have questions or ready to book an appointment? Reach out to our team for personalized assistance.
+            {settings?.contactDescription || 'Have questions or ready to book an appointment? Reach out to our team for personalized assistance.'}
           </p>
         </motion.div>
       </div>
@@ -59,7 +72,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg mb-1">Phone</h4>
-                  <p className="text-gray-600">(27) 71-952-9055</p>
+                  <p className="text-gray-600">{settings?.phone || '(27) 71-952-9055'}</p>
                 </div>
               </div>
               
@@ -69,7 +82,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg mb-1">Email</h4>
-                  <p className="text-gray-600">info@newuwellness.com</p>
+                  <p className="text-gray-600">{settings?.email || 'info@newuwellness.com'}</p>
                 </div>
               </div>
               
@@ -79,7 +92,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg mb-1">Location</h4>
-                  <p className="text-gray-600">87 Matthews Street, Klein Nederbury, Paarl 7646</p>
+                  <p className="text-gray-600">{settings?.address || '87 Matthews Street, Klein Nederbury, Paarl 7646'}</p>
                 </div>
               </div>
               
@@ -89,16 +102,16 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg mb-1">Business Hours</h4>
-                  <p className="text-gray-600">Monday - Friday: 9am - 5pm</p>
-                  <p className="text-gray-600">Saturday: 10am - 5pm</p>
-                  <p className="text-gray-600">Sunday: Closed</p>
+                  {businessHours.map((hours, index) => (
+                    <p key={index} className="text-gray-600">{hours}</p>
+                  ))}
                 </div>
               </div>
             </div>
             
             <div className="mt-8">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425882426903!3d40.74076987138443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1659012345678!5m2!1sen!2sus" 
+                src={settings?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425882426903!3d40.74076987138443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1659012345678!5m2!1sen!2sus"} 
                 width="100%" 
                 height="200" 
                 style={{ border: 0 }} 
@@ -171,10 +184,9 @@ const ContactSection = () => {
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-newu-green focus:border-newu-green transition-colors duration-300"
                 >
                   <option value="">Select a service</option>
-                  <option value="massage">Massage Therapy</option>
-                  <option value="facial">Facial Treatment</option>
-                  <option value="waxing">Waxing</option>
-                  <option value="inch">Inch by Inch Program</option>
+                  {serviceOptions.map((option) => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
                   <option value="other">Other</option>
                 </select>
               </div>

@@ -13,6 +13,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
 import { SectionProvider } from "./context/SectionContext";
+import { SanityProvider } from "./context/SanityContext";
 
 // ScrollToTop component to handle scrolling to top on route change
 const ScrollToTop = () => {
@@ -31,21 +32,23 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <SectionProvider>
-        <BrowserRouter>
-          <ScrollToTop />
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/booking" element={<Booking />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <SanityProvider>
+          <BrowserRouter>
+            <ScrollToTop />
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/booking" element={<Booking />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </SanityProvider>
       </SectionProvider>
     </TooltipProvider>
   </QueryClientProvider>

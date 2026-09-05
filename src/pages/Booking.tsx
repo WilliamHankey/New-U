@@ -3,9 +3,15 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useSection } from '../context/SectionContext';
+import { useSanity } from '../context/SanityContext';
 
 const Booking = () => {
   const { currentSection } = useSection();
+  const { services } = useSanity();
+  
+  const sectionServices = services
+    .filter((s) => s.section === currentSection)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -74,21 +80,11 @@ const Booking = () => {
                     required
                   >
                     <option value="">Select a service</option>
-                    {currentSection === 'wellness' ? (
-                      <>
-                        <option value="massage">Therapeutic Massage</option>
-                        <option value="facial">Facial Treatments</option>
-                        <option value="waxing">Waxing Services</option>
-                        <option value="beauty">Beauty Packages</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="isometric">Isometric Exercises</option>
-                        <option value="transformation">Body Transformation</option>
-                        <option value="toning">Targeted Toning</option>
-                        <option value="post-pregnancy">Post-Pregnancy Programs</option>
-                      </>
-                    )}
+                    {sectionServices.map((service) => (
+                      <option key={service._id} value={service.title?.toLowerCase().replace(/\s+/g, '-')}>
+                        {service.title}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 

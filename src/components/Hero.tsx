@@ -1,12 +1,14 @@
 
 import React, { useEffect, useRef } from 'react';
 import { useSection } from '../context/SectionContext';
+import { useSanity } from '../context/SanityContext';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const { currentSection, switchSection } = useSection();
+  const { settings } = useSanity();
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,32 +27,48 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const heroData = {
-    wellness: {
-      title: "Revitalize Your Beauty & Wellness Journey",
-      subtitle: "Expert treatments tailored to enhance your natural radiance",
-      description: "Experience transformative beauty services and therapeutic wellness treatments designed to rejuvenate both body and mind.",
-      backgroundClass: "bg-[url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070')] bg-cover bg-center",
-      buttonText: "Explore Our Treatments"
-    },
-    inch: {
-      title: "Transform Your Body Inch by Inch",
-      subtitle: "Specialized isometric bed exercises for targeted results",
-      description: "Our revolutionary approach helps you reshape your body with precision through effective, low-impact isometric exercises.",
-      backgroundClass: "bg-[url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070')] bg-cover bg-center",
-      buttonText: "More"
-    }
+  const wellnessHero = {
+    eyebrow: settings?.heroEyebrow || 'Wellness & Beauty',
+    title:
+      settings?.heroTitle ||
+      'Revitalize Your Beauty & Wellness Journey',
+    subtitle:
+      settings?.heroSubtitle || 'Expert treatments tailored to enhance your natural radiance',
+    description:
+      settings?.heroDescription ||
+      'Experience transformative beauty services and therapeutic wellness treatments designed to rejuvenate both body and mind.',
+    backgroundImage:
+      settings?.heroBackgroundImage ||
+      "url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070')",
+    buttonText: settings?.heroButtonText || 'Explore Our Treatments'
   };
 
-  const content = currentSection === 'wellness' ? heroData.wellness : heroData.inch;
+  const inchHero = {
+    eyebrow: settings?.inchHeroEyebrow || 'Inch by Inch',
+    title:
+      settings?.inchHeroTitle ||
+      'Transform Your Body Inch by Inch',
+    subtitle:
+      settings?.inchHeroSubtitle || 'Specialized isometric bed exercises for targeted results',
+    description:
+      settings?.inchHeroDescription ||
+      'Our revolutionary approach helps you reshape your body with precision through effective, low-impact isometric exercises.',
+    backgroundImage:
+      settings?.inchHeroBackgroundImage ||
+      "url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070')",
+    buttonText: settings?.inchHeroButtonText || 'More'
+  };
+
+  const content = currentSection === 'wellness' ? wellnessHero : inchHero;
 
   return (
     <div
       ref={heroRef}
       className={cn(
         "relative min-h-screen flex items-center justify-center",
-        content.backgroundClass
+        "bg-cover bg-center"
       )}
+      style={{ backgroundImage: content.backgroundImage }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -65,7 +83,7 @@ const Hero = () => {
           className="mb-6"
         >
           <span className="bg-newu-green px-4 py-1 rounded-full text-xs uppercase tracking-wider font-bold inline-block">
-            {currentSection === 'wellness' ? 'Wellness & Beauty' : 'Inch by Inch'}
+            {content.eyebrow}
           </span>
         </motion.div>
         
@@ -110,7 +128,7 @@ const Hero = () => {
             to="/booking"
             className="bg-newu-green hover:bg-newu-green-dark text-white px-8 py-3 rounded-md font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 text-base w-full sm:w-auto"
           >
-            Book Appointment
+            {settings?.bookingButtonText || 'Book Appointment'}
           </Link>
           <Link
             to="/services"
@@ -137,7 +155,7 @@ const Hero = () => {
                   : "text-white hover:bg-white hover:bg-opacity-10"
               )}
             >
-              Wellness & Beauty
+              {wellnessHero.eyebrow}
             </button>
             <button
               onClick={() => switchSection('inch')}
@@ -148,7 +166,7 @@ const Hero = () => {
                   : "text-white hover:bg-white hover:bg-opacity-10"
               )}
             >
-              Inch by Inch
+              {inchHero.eyebrow}
             </button>
           </div>
         </motion.div>

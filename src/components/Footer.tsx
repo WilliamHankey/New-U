@@ -1,12 +1,31 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Mail, MapPin, Phone } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
+import { useSanity } from '../context/SanityContext';
 
 const Footer = () => {
   const { currentSection } = useSection();
+  const { settings, services } = useSanity();
   const year = new Date().getFullYear();
+
+  const sectionServices = services
+    .filter((s) => s.section === currentSection)
+    .slice(0, 4);
+
+  const socialIcon = (platform: string) => {
+    switch (platform?.toLowerCase()) {
+      case 'facebook':
+        return <Facebook size={20} />;
+      case 'instagram':
+        return <Instagram size={20} />;
+      case 'twitter':
+      case 'x':
+        return <Twitter size={20} />;
+      default:
+        return <Facebook size={20} />;
+    }
+  };
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -16,22 +35,28 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-1 lg:col-span-1">
             <div className="flex items-center mb-4">
               <span className="text-2xl font-bold font-heading">
-                <span className="text-newu-green">New-U</span>
+                <span className="text-newu-green">{settings?.title || 'New-U'}</span>
               </span>
             </div>
             <p className="text-gray-400 mb-4">
-              Transforming wellness and beauty journeys with expert care and personalized approaches.
+              {settings?.footerDescription ||
+                'Transforming wellness and beauty journeys with expert care and personalized approaches.'}
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-newu-green transition-all" aria-label="Facebook">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-newu-green transition-all" aria-label="Instagram">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-newu-green transition-all" aria-label="Twitter">
-                <Twitter size={20} />
-              </a>
+              {(settings?.socialLinks && settings.socialLinks.length > 0 ? settings.socialLinks : []).map(
+                (social, index) => (
+                  <a
+                    key={index}
+                    href={social.url || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-newu-green transition-all"
+                    aria-label={social.platform}
+                  >
+                    {socialIcon(social.platform)}
+                  </a>
+                )
+              )}
             </div>
           </div>
 
@@ -61,7 +86,13 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              {currentSection === 'wellness' ? (
+              {sectionServices.length > 0 ? (
+                sectionServices.map((service) => (
+                  <li key={service._id} className="text-gray-400 hover:text-newu-green transition-all">
+                    <Link to="/services">{service.title}</Link>
+                  </li>
+                ))
+              ) : currentSection === 'wellness' ? (
                 <>
                   <li className="text-gray-400 hover:text-newu-green transition-all">Therapeutic Massage</li>
                   <li className="text-gray-400 hover:text-newu-green transition-all">Facial Treatments</li>
@@ -85,22 +116,28 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-start">
                 <MapPin className="h-5 w-5 text-newu-green mr-2 mt-0.5" />
-                <span className="text-gray-400">87 Matthews Street, Klein Nederbury, Paarl 7646</span>
+                <span className="text-gray-400">{settings?.address || '87 Matthews Street, Klein Nederbury, Paarl 7646'}</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-5 w-5 text-newu-green mr-2" />
-                <span className="text-gray-400">(27) 71-952-9055</span>
+                <span className="text-gray-400">{settings?.phone || '(27) 71-952-9055'}</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-5 w-5 text-newu-green mr-2" />
-                <a href="mailto:info@new-u.com" className="text-gray-400 hover:text-newu-green transition-all">info@new-u.com</a>
+                <a href={`mailto:${settings?.email || 'info@new-u.com'}`} className="text-gray-400 hover:text-newu-green transition-all">
+                  {settings?.email || 'info@new-u.com'}
+                </a>
               </div>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500 text-sm">
-          <p>&copy; {year} New-U Wellness & Beauty. All rights reserved.</p>
+          <p>
+            {settings?.copyrightText
+              ? settings.copyrightText.replace('{year}', String(year))
+              : `© ${year} New-U Wellness & Beauty. All rights reserved.`}
+          </p>
         </div>
       </div>
     </footer>
