@@ -5,10 +5,12 @@ import {
   fetchServices,
   fetchTestimonials,
   fetchGalleryImages,
+  fetchSupplements,
   SiteSettings,
   Service,
   Testimonial,
   GalleryImage,
+  Supplement,
 } from '../lib/sanity'
 
 interface SanityContextType {
@@ -16,6 +18,7 @@ interface SanityContextType {
   services: Service[]
   testimonials: Testimonial[]
   galleryImages: GalleryImage[]
+  supplements: Supplement[]
   isLoading: boolean
   isError: boolean
 }
@@ -43,17 +46,24 @@ export const SanityProvider = ({ children }: { children: ReactNode }) => {
     queryFn: fetchGalleryImages,
   })
 
+  const supplementsQuery = useQuery({
+    queryKey: ['supplements'],
+    queryFn: fetchSupplements,
+  })
+
   const isLoading =
     settingsQuery.isLoading ||
     servicesQuery.isLoading ||
     testimonialsQuery.isLoading ||
-    galleryQuery.isLoading
+    galleryQuery.isLoading ||
+    supplementsQuery.isLoading
 
   const isError =
     settingsQuery.isError ||
     servicesQuery.isError ||
     testimonialsQuery.isError ||
-    galleryQuery.isError
+    galleryQuery.isError ||
+    supplementsQuery.isError
 
   return (
     <SanityContext.Provider
@@ -62,6 +72,7 @@ export const SanityProvider = ({ children }: { children: ReactNode }) => {
         services: servicesQuery.data ?? [],
         testimonials: testimonialsQuery.data ?? [],
         galleryImages: galleryQuery.data ?? [],
+        supplements: supplementsQuery.data ?? [],
         isLoading,
         isError,
       }}

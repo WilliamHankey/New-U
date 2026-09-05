@@ -12,6 +12,7 @@ import Services from "./pages/Services";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
+import Supplements from "./pages/Supplements";
 import { SectionProvider } from "./context/SectionContext";
 import { SanityProvider } from "./context/SanityContext";
 
@@ -44,6 +45,7 @@ const App = () => (
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/booking" element={<Booking />} />
+              <Route path="/supplements" element={<Supplements />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

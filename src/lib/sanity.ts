@@ -105,6 +105,20 @@ export interface GalleryImage {
   order?: number
 }
 
+export type SupplementStatus = 'inStock' | 'comingSoon' | 'outOfStock'
+
+export interface Supplement {
+  _id: string
+  title?: string
+  price?: string
+  status?: SupplementStatus
+  image?: SanityImageSource
+  imageUrl?: string
+  description?: string
+  benefits?: string[]
+  order?: number
+}
+
 const settingsQuery = `*[_type == "siteSettings"][0]`
 
 const servicesQuery = `*[_type == "service"] | order(order asc) {
@@ -140,6 +154,18 @@ const galleryQuery = `*[_type == "galleryImage"] | order(order asc) {
   order
 }`
 
+const supplementsQuery = `*[_type == "supplement"] | order(order asc) {
+  _id,
+  title,
+  price,
+  status,
+  image,
+  imageUrl,
+  description,
+  benefits,
+  order
+}`
+
 export async function fetchSiteSettings(): Promise<SiteSettings> {
   return sanityClient.fetch<SiteSettings>(settingsQuery)
 }
@@ -154,6 +180,10 @@ export async function fetchTestimonials(): Promise<Testimonial[]> {
 
 export async function fetchGalleryImages(): Promise<GalleryImage[]> {
   return sanityClient.fetch<GalleryImage[]>(galleryQuery)
+}
+
+export async function fetchSupplements(): Promise<Supplement[]> {
+  return sanityClient.fetch<Supplement[]>(supplementsQuery)
 }
 
 export function resolveImageUrl(item: {
